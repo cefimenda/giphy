@@ -18,36 +18,42 @@
 </head>
 
 <body>
+    <placeholder class="navbar navbar-expand-lg navbar-light bg-light ">
+    </placeholder>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="#">Giphy Search</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <form class="form-inline w-100">
+            <input type="text" class="form-control w-50" id="gifQuery" placeholder="Search Gifs">
+            <select class="form-control mx-3" id="gifCount">
+                <option>1</option>
+                <option>5</option>
+                <option>10</option>
+                <option>15</option>
+                <option>20</option>
+            </select>
+            <button type="submit" class="btn btn-outline-primary" id="searchButton">Search</button>
+        </form>
+        <div class="">
+            <button class="btn btn-outline-danger my-2 my-sm-0" id="favoritesButton" type="submit">Favorites</button>
+        </div>
+    </nav>
     <div class="container m-5">
         <div class="row">
             <div class="col-12 pastSearches">
 
             </div>
         </div>
-        <div class="row displayGif">
+        <div class="row displayGif justify-content-center">
 
         </div>
         <div class="row">
             <div class="col-12 searchGif">
-                <form>
-                    <div class="row">
-                        <div class="form-group col-10">
-                            <label for="gifQuery">Search Gif</label>
-                            <input type="text" class="form-control" id="gifQuery" placeholder="Type your keyword here...">
-                        </div>
-                        <div class="form-group col-2">
-                            <label for="gifCount">Gif Count</label>
-                            <select class="form-control" id="gifCount">
-                                <option>1</option>
-                                <option>5</option>
-                                <option>10</option>
-                                <option>15</option>
-                                <option>20</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary col-12">Search Gifs</button>
-                    </div>
-                </form>
+
             </div>
         </div>
     </div>
