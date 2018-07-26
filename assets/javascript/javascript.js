@@ -100,7 +100,7 @@ function dumpGif(gifObj) {
     }
     var imageUrl = gifObj.static
     var titleText = gifObj.title
-    var container = $("<div>").addClass("card bg-light col-3 shadow-sm p-0 m-1")
+    var container = $("<div>").addClass("card bg-light col-12 col-sm-6 col-md-4 col-lg-3 shadow-sm mx-auto p-0 m-sm-1")
     container.css({
         'width': '200px',
         'max-height': '350px',
