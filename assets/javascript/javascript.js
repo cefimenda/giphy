@@ -33,6 +33,9 @@ $(function () {
         parameters.limit = $("#gifCount option:selected").val()
         $("#gifQuery").val("")
         gifSearch(parameters)
+        searchHistory.push(parameters.q)
+        createHistoryBar()
+        getHistoryButtons()
     });
     $(".displayGif").on('click', '.close', function () {
         var id = $(this).parent().parent().attr("id")
@@ -92,6 +95,12 @@ $(function () {
         } else {
             $(this).attr('src', gifList[id].static)
         }
+    });
+    $(".navbarRow").on("click",".historyButton",function(){
+        parameters.q = $(this).text()
+        parameters.limit = $("#gifCount option:selected").val()
+        $("#gifQuery").val("")
+        gifSearch(parameters)
     });
 })
 
@@ -163,8 +172,27 @@ function Gif(gif) {
 }
 
 function createHistoryBar(){
-    var div = $("<div>").addClass('w-100 historyBar bg-warning mb-0')
-    $('nav').append(div)
-    var placeholder = $("<div>").addClass("w-100 placeolder")
+    $(".historyBar").remove()
+    $(".historyCol").remove()
+    $(".dynamicPlaceholder").remove()
+    $(".historyLine").remove()
+
+    var col = $("<div>").addClass("col-12 historyCol")
+    col.append("<hr class ='historyLine>")
+    var div = $("<div>").addClass('w-100 historyBar mt-3 mb-0')
+    div.text('Search History')
+    col.append(div)
+    $(".navbarRow").append(col)
+    var placeholder = $("<div>").addClass("w-100 mt-3 p-3 dynamicPlaceholder")
     $("body").prepend(placeholder)
+}
+
+function getHistoryButtons(){
+    $(".historyBar").empty()
+    for (var i in searchHistory){
+        var but = $("<button>").addClass('btn-sm ml-3 btn-outline-secondary historyButton')
+        but.text(searchHistory[i])
+        $(".historyBar").prepend(but)
+    }
+    $(".historyBar").prepend('Recent: ')
 }
