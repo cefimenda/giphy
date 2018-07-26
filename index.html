@@ -21,23 +21,40 @@
     <placeholder class="navbar navbar-expand-lg mb-5 mb-sm-0 navbar-light bg-light ">
     </placeholder>
     <placeholder class="navbar navbar-expand-lg d-lg-none d-block p-5 p-sm-3 my-3 my-md-1 mb-sm-0 navbar-light bg-light">
-        </placeholder>
+    </placeholder>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <a class="navbar-brand" href="#">Giphy Search</a>
-        <form class="form-inline w-100">
-            <input type="text" class="form-control w-50 col-12 col-sm" id="gifQuery" placeholder="Search Gifs">
-            <select class="form-control mx-sm-3 my-1 my-sm-auto col-12 col-sm" id="gifCount">
-                <option>1</option>
-                <option>5</option>
-                <option>10</option>
-                <option>15</option>
-                <option>20</option>
-            </select>
-            <button type="submit" class="col-5 col-sm btn btn-outline-primary" id="searchButton">Search Gifs</button>
-            <div class='placeholder col-1'></div>
-            <button class="btn btn-outline-danger col-5 col-sm" id='favoritesButton'>Show Favorites</button>
-        </form>
+        <div class="row w-100">
+            <div class="col-12 col-md-2">
+                <a class="navbar-brand" href="#">Giphy Search</a>
+            </div>
+            <div class="col-12 col-md-10">
+                <form>
+                    <div class="row">
+                        <div class="col-12 col-sm-6 px-1">
+                            <input type="text" class="form-control w-100" id="gifQuery" placeholder="Search Gifs">
+                        </div>
+                        <div class="col-12 col-sm-2 px-1">
+                            <select class="form-control my-1 my-sm-auto" id="gifCount">
+                                <option>1</option>
+                                <option>5</option>
+                                <option>10</option>
+                                <option>15</option>
+                                <option>20</option>
+                            </select>
+                        </div>
+                        <div class="col-5 col-sm-2 px-0 ml-1 ml-sm-0">
+                            <button type="submit" class=" btn btn-outline-primary" id="searchButton">Search Gifs</button>
+
+                        </div>
+                        <div class="col-5 col-sm-2">
+                            <button class="btn btn-outline-danger" id='favoritesButton'>Show Favorites</button>
+                        </div>
+                    </div>
+                </form>
+            </div>  
+        </div>
+
     </nav>
     <div class="container">
         <div class="row">

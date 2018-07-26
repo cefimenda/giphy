@@ -1,5 +1,6 @@
 gifList = {}
 likedGifs = {}
+searchHistory = []
 
 async function gifSearch(searchParameters) {
     var query = $.param(searchParameters)
@@ -159,4 +160,11 @@ function Gif(gif) {
     this.element = {
     };
     this.rating = gif.rating
+}
+
+function createHistoryBar(){
+    var div = $("<div>").addClass('w-100 historyBar bg-warning mb-0')
+    $('nav').append(div)
+    var placeholder = $("<div>").addClass("w-100 placeolder")
+    $("body").prepend(placeholder)
 }
