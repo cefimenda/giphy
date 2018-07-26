@@ -34,7 +34,7 @@ $(function () {
         gifSearch(parameters)
     });
     $(".displayGif").on('click', '.close', function () {
-        var id =$(this).parent().parent().attr("id")
+        var id = $(this).parent().parent().attr("id")
         delete gifList[id]
         $(this).parent().parent().remove()
     });
@@ -57,38 +57,47 @@ $(function () {
     });
     $(".displayGif").on('click', '.heart', function () {
         var id = $(this).parent().parent().attr('id')
-        if (gifList[id].liked==true) {
-            gifList[id].liked=false
+        if (gifList[id].liked == true) {
+            gifList[id].liked = false
 
             delete likedGifs[id]
         } else {
-            gifList[id].liked=true
-            likedGifs[id]=gifList[id]
+            gifList[id].liked = true
+            likedGifs[id] = gifList[id]
             return
         }
     });
     $("#favoritesButton").click(function () {
-        if ($(this).text()=="Favorites") {
+        if ($(this).text() == "Favorites") {
             $(".displayGif").empty()
             for (var i in likedGifs) {
                 $('.displayGif').prepend(likedGifs[i].element)
             }
             $(this).text('Show All')
-        }else{
+        } else {
             $(".displayGif").empty()
             for (var i in gifList) {
                 $('.displayGif').prepend(gifList[i].element)
             }
             $(this).text('Favorites')
         }
-    })
+    });
+    $(".displayGif").on("click", ".card-img-top", function () {
+        var id = $(this).parent().attr('id')
+        console.log(id)
+        if ($(this).attr('src') == gifList[id].static) {
+            $(this).attr('src', gifList[id].url)
+        } else {
+            $(this).attr('src', gifList[id].static)
+        }
+    });
 })
 
 function dumpGif(gifObj) {
-    for (var i in gifList){
-        if (gifObj.id==gifList[i].id){return}
+    for (var i in gifList) {
+        if (gifObj.id == gifList[i].id) { return }
     }
-    var imageUrl = gifObj.url
+    var imageUrl = gifObj.static
     var titleText = gifObj.title
     var container = $("<div>").addClass("card bg-light col-3 shadow-sm p-0 m-1")
     container.css({
@@ -143,18 +152,10 @@ function dumpGif(gifObj) {
 function Gif(gif) {
     this.liked = false
     this.id = gif.id
+    this.static = gif.images['480w_still'].url
     this.url = gif.images.original.url;
     this.title = gif.title;
     this.element = {
     };
     this.rating = gif.rating
 }
-function removeGifFromList(gifTitle, list) {
-    for (var i in list) {
-        if (list[i].title == gifTitle) {
-            list.splice(i, 1)
-            return
-        }
-    }
-}
-
