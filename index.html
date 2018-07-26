@@ -23,24 +23,20 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <a class="navbar-brand" href="#">Giphy Search</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-            aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
         <form class="form-inline w-100">
-            <input type="text" class="form-control w-50" id="gifQuery" placeholder="Search Gifs">
-            <select class="form-control mx-3" id="gifCount">
+            <input type="text" class="form-control w-50 col-12 col-sm" id="gifQuery" placeholder="Search Gifs">
+            <select class="form-control mx-sm-3 my-1 my-sm-auto col-12 col-sm" id="gifCount">
                 <option>1</option>
                 <option>5</option>
                 <option>10</option>
                 <option>15</option>
                 <option>20</option>
             </select>
-            <button type="submit" class="btn btn-outline-primary" id="searchButton">Search</button>
+            <button type="submit" class="col-5 col-sm btn btn-outline-primary" id="searchButton">Search Gifs</button>
+            <div class='placeholder col-1'></div>
+            <button class="btn btn-outline-danger col-5 col-sm" id='favoritesButton'>Show Favorites</button>
         </form>
-        <div class="">
-            <button class="btn btn-outline-danger my-2 my-sm-0" id="favoritesButton" type="submit">Favorites</button>
-        </div>
+        
     </nav>
     <div class="container m-5">
         <div class="row">

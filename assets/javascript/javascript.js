@@ -68,7 +68,8 @@ $(function () {
         }
     });
     $("#favoritesButton").click(function () {
-        if ($(this).text() == "Favorites") {
+        event.preventDefault()
+        if ($(this).text() == "Show Favorites") {
             $(".displayGif").empty()
             for (var i in likedGifs) {
                 $('.displayGif').prepend(likedGifs[i].element)
@@ -79,7 +80,7 @@ $(function () {
             for (var i in gifList) {
                 $('.displayGif').prepend(gifList[i].element)
             }
-            $(this).text('Favorites')
+            $(this).text('Show Favorites')
         }
     });
     $(".displayGif").on("click", ".card-img-top", function () {
