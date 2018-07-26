@@ -1,5 +1,5 @@
-gifList = []
-likedGifs = []
+gifList = {}
+likedGifs = {}
 
 async function gifSearch(searchParameters) {
     var query = $.param(searchParameters)
@@ -13,7 +13,7 @@ async function gifSearch(searchParameters) {
             var gifObj = new Gif(response.data[i])
             dumpGif(gifObj)
             gifObj.element = $(".displayGif").children().first()
-            gifList.push(gifObj)
+            gifList[gifObj.id] = gifObj
         }
     })
 }
@@ -34,35 +34,36 @@ $(function () {
         gifSearch(parameters)
     });
     $(".displayGif").on('click', '.close', function () {
+        var id =$(this).parent().parent().attr("id")
+        delete gifList[id]
         $(this).parent().parent().remove()
-        gifTitle = $(this).parent().siblings().last().children().first().text()
-        removeGifFromList(gifTitle, gifList)
     });
     $(".displayGif").on('mouseenter', '.heart', function () {
+        var id = $(this).parent().parent().attr('id')
+
         var currentImg = $(this).attr('src')
         if (currentImg.search("empty") > -1) {
             $(this).attr('src', 'assets/images/like-full.png')
         }
     });
     $(".displayGif").on("mouseleave", ".heart", function () {
+        var id = $(this).parent().parent().attr('id')
+
         var currentImg = $(this).attr('src')
-        if ($(this).attr('liked') == 'true') { return }
+        if (gifList[id].liked == true) { return }
         if (currentImg.search("full") > -1) {
             $(this).attr('src', 'assets/images/like-empty.png')
         }
     });
     $(".displayGif").on('click', '.heart', function () {
-        var currentImg = $(this).attr('src')
-        if ($(this).attr('liked') == 'true') {
-            $(this).attr('liked', 'false')
-            gifTitle = $(this).parent().siblings().last().children().first().text()
-            removeGifFromList(gifTitle, likedGifs)
+        var id = $(this).parent().parent().attr('id')
+        if (gifList[id].liked==true) {
+            gifList[id].liked=false
+
+            delete likedGifs[id]
         } else {
-            $(this).attr('liked', 'true')
-            var container = $(this).parent().parent()
-            var gifObj = JSON.parse(container.attr('gif-data'))
-            gifObj.element = container
-            likedGifs.push(gifObj)
+            gifList[id].liked=true
+            likedGifs[id]=gifList[id]
             return
         }
     });
@@ -92,7 +93,7 @@ function dumpGif(gifObj) {
         'max-height': '350px',
         'overflow': 'scroll'
     });
-    container.attr('gif-data', JSON.stringify(gifObj))
+    container.attr('id', gifObj.id)
     var img = $("<img>").attr("src", imageUrl)
     img.addClass("card-img-top")
     img.css({
@@ -137,6 +138,8 @@ function dumpGif(gifObj) {
 }
 
 function Gif(gif) {
+    this.liked = false
+    this.id = gif.id
     this.url = gif.images.original.url;
     this.title = gif.title;
     this.element = {
@@ -151,3 +154,4 @@ function removeGifFromList(gifTitle, list) {
         }
     }
 }
+
