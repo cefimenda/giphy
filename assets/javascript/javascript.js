@@ -85,6 +85,9 @@ $(function () {
 })
 
 function dumpGif(gifObj) {
+    for (var i in gifList){
+        if (gifObj.id==gifList[i].id){return}
+    }
     var imageUrl = gifObj.url
     var titleText = gifObj.title
     var container = $("<div>").addClass("card bg-light col-3 shadow-sm p-0 m-1")
