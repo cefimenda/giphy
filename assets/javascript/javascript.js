@@ -6,12 +6,10 @@ var displayedGifs = {}
 
 async function gifSearch(searchParameters) {
     var query = $.param(searchParameters)
-    console.log("searching " + searchParameters.q)
     $.ajax({
         url: "https://api.giphy.com/v1/gifs/search?" + query,
         method: "GET"
     }).then(function (response) {
-        console.log(response)
         for (var i = 0; i < response.data.length; i++) {
             var gifObj = new Gif(response.data[i])
             dumpGif(gifObj)
@@ -32,12 +30,10 @@ var parameters = {
 
 $(function () {
     if (searchHistory.length > 0) {
-        console.log('something already stored')
         createHistoryBar()
         getHistoryButtons()
     }
     if (likedGifs != null) {
-        console.log('something already liked')
         $(".faves").empty()
         for (var i in likedGifs) {
             dumpGif(likedGifs[i], $(".faves"))
@@ -85,7 +81,6 @@ $(function () {
     });
     $(".displayGif").on("click", ".card-img-top", function () {
         var id = $(this).parent().attr('id')
-        console.log(id)
         if ($(this).attr('src') == gifList[id].static) {
             $(this).attr('src', gifList[id].url)
         } else {
@@ -94,7 +89,6 @@ $(function () {
     });
     $(".faves").on("click", ".card-img-top", function () {
         var id = $(this).parent().attr('id')
-        console.log(id)
         if ($(this).attr('src') == gifList[id].static) {
             $(this).attr('src', gifList[id].url)
         } else {
@@ -114,26 +108,19 @@ $(function () {
 
 function heartButtonClick(that) {
     var id = $(that).parent().parent().attr('id')
-    console.log(gifList[id].liked)
-    console.log
     if (gifList[id].liked != true) {
-        console.log('liking')
         gifList[id].liked = true
         $(".faves").empty()
         likedGifs[id] = gifList[id]
         for (var i in likedGifs) {
-            console.log("dumping")
             dumpGif(likedGifs[i], $(".faves"))
         }
         changeLikedButton('full', id)
     } else {
-        console.log('disliking')
         gifList[id].liked = false
         delete likedGifs[id]
-        console.log('test')
         $(".faves").empty()
         for (var i in likedGifs) {
-            console.log("dumping")
             dumpGif(likedGifs[i], $(".faves"))
         }
         changeLikedButton('empty', id)
